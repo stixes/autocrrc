@@ -45,11 +45,11 @@ public class MNAV {
     public void sendData(byte[] data) {
         try {
             data = encode(data);
-            System.out.print("pkg: [");
-            for (byte b : data) {
-                System.out.print(b + ",");
-            }
-            System.out.println("]");
+//            System.out.print("pkg: [");
+//            for (byte b : data) {
+//                System.out.print(b + ",");
+//            }
+//            System.out.println("]");
             sock.send(new DatagramPacket(data, data.length, mnav_addr));
         } catch (IOException ex) {
         }

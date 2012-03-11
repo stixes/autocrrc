@@ -6,6 +6,7 @@ package jmnavpilot;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.java.games.input.*;
 
 /**
  *
@@ -14,6 +15,7 @@ import java.util.logging.Logger;
 public class JMNAVPilot {
 
     private final MNAV mnav;
+    private final Gamepad g = new Gamepad();
 
     public JMNAVPilot() throws Exception {
         mnav = new MNAV();
@@ -27,7 +29,6 @@ public class JMNAVPilot {
         System.out.println("Hello, World!");
         JMNAVPilot pilot = new JMNAVPilot();
         pilot.run();
-
     }
 
     public void setServos(float ch0, float ch1, float thrust) {
@@ -45,10 +46,31 @@ public class JMNAVPilot {
     public void run() {
         System.out.println(mnav);
         int count = 0;
-        setServos(0.5f, 0.55f, 1);
-        System.out.println(mnav.update());
-        setServos(0.5f, 0.5f, 0);
-        System.out.println(mnav.update());
+        float ch0,ch1;
+        PlaneState ps = new PlaneState(1f/100);
+        MNAVState state;
+        Pilot pilot = new SimpleAutopilot();
+        float[] controls;
+        while (true) {
+            state = mnav.update();
+            ps.update(state);
+            pilot.update(ps);
+            controls = pilot.getControls();
+            ch0 = (controls[0] + controls[1])/2;
+            ch1 = (controls[0] - controls[1])/2;
+            setServos(ch0,ch1, controls[2]);
+            if (10 == count++) {
+                System.out.println(state);
+                System.out.println(ps);
+                count = 0;
+            }
+
+        }
+//        int count = 0;
+//        setServos(0.5f, 0.55f, 1);
+//        System.out.println(mnav.update());
+//        setServos(0.5f, 0.5f, 0);
+//        System.out.println(mnav.update());
 //        while (true) {
 //            MNAVState state = mnav.update();
 //            if (10 == count++) {

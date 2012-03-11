@@ -162,14 +162,11 @@ public class MNAVState {
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat(" 0.00;-#");
-        DecimalFormat df1 = new DecimalFormat("0%");
         return "+- MNAVState ------------------------------+\n"
                 + " Accel:       ( " + df.format(xAccel) + " , " + df.format(yAccel) + " , " + df.format(zAccel) + ")\n"
                 + " Rate:        ( " + df.format(xRate) + " , " + df.format(yRate) + " , " + df.format(zRate) + ")\n"
                 + " Mag:         ( " + df.format(xMag) + " , " + df.format(yMag) + " , " + df.format(zMag) + ")\n"
-                + " Temp:        ( " + df.format(xTemp) + " , " + df.format(yTemp) + " , " + df.format(zTemp) + ")\n"
                 + " Alt:        " + df.format(absPress) + "[m] - Speed: " + df.format(pitotPress) + "[m/s]\n"
-                + " PPM:         " + df1.format(ppm[0]) +  ","+ df1.format(ppm[1]) +  ","+ df1.format(ppm[2]) +  ","+ df1.format(ppm[3]) +  ","+ df1.format(ppm[4]) +  ","+ df1.format(ppm[5]) +  ","+ df1.format(ppm[6]) +  ","+ df1.format(ppm[7]) +  "\n"
                 + "+------------------------------------------+";
     }
 }
