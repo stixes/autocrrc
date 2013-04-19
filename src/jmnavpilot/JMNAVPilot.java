@@ -4,10 +4,10 @@
  */
 package jmnavpilot;
 
+import jmnavpilot.ui.jMNAVStatusFrame;
 import crrc.CRRCDataPacket;
 import crrc.CRRCSocket;
 import java.io.IOException;
-//import net.java.games.input.*;
 
 /**
  *

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jmnavpilot;
+package jmnavpilot.ui;
 
 /**
  *
@@ -52,7 +52,6 @@ public class jMNAVStatusFrame extends javax.swing.JFrame {
         jTextPane1 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 200));
 
         jTextPane1.setText("Hello, World!");
         jScrollPane1.setViewportView(jTextPane1);

@@ -7,12 +7,8 @@ package crrc;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -36,7 +32,7 @@ public class CRRCSocket extends Socket {
                         System.exit(0);
                     }
                     try {
-                        Thread.sleep(2000); // 1Hz
+                        Thread.sleep(2000); // 2Hz
                     } catch (InterruptedException ex) {
                         // Supposed to be interupted.
                     }
