@@ -4,9 +4,10 @@
  */
 package jmnavpilot;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.java.games.input.*;
+import crrc.CRRCDataPacket;
+import crrc.CRRCSocket;
+import java.io.IOException;
+//import net.java.games.input.*;
 
 /**
  *
@@ -14,11 +15,11 @@ import net.java.games.input.*;
  */
 public class JMNAVPilot {
 
-    private final MNAV mnav;
-    private final Gamepad g = new Gamepad();
+    private final CRRCSocket mnav;
+//    private final Gamepad g = new Gamepad();
 
     public JMNAVPilot() throws Exception {
-        mnav = new MNAV();
+        mnav = CRRCSocket.getSocket();
     }
 
     /**
@@ -34,34 +35,32 @@ public class JMNAVPilot {
     public void setServos(float ch0, float ch1, float thrust) {
         byte[] ss = {'S', 'S'};
         byte[] blancs = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        ss = mnav.concat(ss,
-                mnav.concat(mnav.bytesFromPPM((1 + ch0) / 2), // Unknown
-                mnav.concat(mnav.bytesFromPPM((1 + ch1) / 2), // Unknown
-                mnav.concat(mnav.bytesFromPPM(thrust), // Thrust
-                blancs))));
-        mnav.sendData(ss);
+//        ss = mnav.concat(ss,
+//                mnav.concat(mnav.bytesFromPPM((1 + ch0) / 2), // Unknown
+//                mnav.concat(mnav.bytesFromPPM((1 + ch1) / 2), // Unknown
+//                mnav.concat(mnav.bytesFromPPM(thrust), // Thrust
+//                blancs))));
+//        mnav.sendData(ss);
 
     }
 
-    public void run() {
+    public void run() throws IOException {
         System.out.println(mnav);
+        jMNAVStatusFrame frame = new jMNAVStatusFrame();
+        frame.setVisible(true);
         int count = 0;
-        float ch0,ch1;
-        PlaneState ps = new PlaneState(1f/100);
-        MNAVState state;
+        float ch0, ch1;
+        PlaneState ps = new PlaneState(1f / 100);
+        CRRCDataPacket state;
         Pilot pilot = new SimpleAutopilot();
         float[] controls;
         while (true) {
-            state = mnav.update();
-            ps.update(state);
-            pilot.update(ps);
-            controls = pilot.getControls();
-            ch0 = (controls[0] + controls[1])/2;
-            ch1 = (controls[0] - controls[1])/2;
-            setServos(ch0,ch1, controls[2]);
-            if (10 == count++) {
-                System.out.println(state);
-                System.out.println(ps);
+            state = mnav.receive();
+            if (count++ == 25) {
+                long time = System.currentTimeMillis();
+                System.out.println("time: " + time);
+                frame.updateText(state.toString());
+
                 count = 0;
             }
 
