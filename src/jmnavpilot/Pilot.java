@@ -11,6 +11,6 @@ package jmnavpilot;
 public interface Pilot {
     
     public void update(PlaneState ps);
-    public float[] getControls();
+    public double[] getControls();
     
 }

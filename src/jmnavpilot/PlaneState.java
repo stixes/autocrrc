@@ -4,58 +4,60 @@
  */
 package jmnavpilot;
 
+import crrc.CRRCDataPacket;
+
 /**
  *
  * @author Jesper
  */
 public class PlaneState {
 
-    private MNAVState sensors = null;
-    private float roll = 0;
-    private float pitch = 0;
-    private float yaw = 0;
-    private float alt = 0;
-    private final float dt;
+    private CRRCDataPacket sensors = null;
+    private double roll = 0;
+    private double pitch = 0;
+    private double yaw = 0;
+    private double alt = 0;
+    private final double dt;
 
-    public PlaneState(float dt) {
+    public PlaneState(double dt) {
         this.dt = dt;
         reset();
     }
 
-    public void update(MNAVState s) {
-        roll += s.getxRate() * dt;
-        pitch += s.getyRate() * dt;
-        yaw += s.getzRate() * dt;
-        alt = s.getAbsPress();
+    public void update(CRRCDataPacket s) {
+        roll += s.getAng().getX() * dt;
+        pitch += s.getAng().getY() * dt;
+        yaw += s.getAng().getZ() * dt;
+        alt = s.getAlt();
         sensors = s;
         // Resetting state on chrash or reset
-        if (s.getAbsPress() + s.getPitotPress() == 0) {
+        if (s.getAlt() + s.getSpd() == 0) {
             reset();
         }
     }
 
-    public float getPitch() {
+    public double getPitch() {
         return pitch;
     }
 
-    public MNAVState getSensors() {
+    public CRRCDataPacket getSensors() {
         return sensors;
     }
 
-    public float getRoll() {
+    public double getRoll() {
         return roll;
     }
 
-    public float getYaw() {
+    public double getYaw() {
         return yaw;
     }
 
-    public float getAlt() {
+    public double getAlt() {
         return alt;
     }
 
     private void reset() {
-        roll = pitch = yaw = alt = 0;
+        roll = pitch = yaw = alt = 0.0;
     }
 
     @Override
