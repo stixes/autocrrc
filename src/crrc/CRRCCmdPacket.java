@@ -43,7 +43,8 @@ public class CRRCCmdPacket {
         int idx = 2;
         char val;
         for (double d : data) {
-            val = (char) (d * 65536);
+            d = Math.min(1, Math.max(0, d));
+            val = (char) (d * 65535);
             cmd[idx++] = (byte) (val >>> 8);
             cmd[idx++] = (byte) (val & 0xFF);
         }
