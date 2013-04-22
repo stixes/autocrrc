@@ -35,10 +35,31 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="jmnavpilot.ui.AltMeter" name="altMeter2">
+    <Component class="jmnavpilot.ui.AltMeter" name="altMeter">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="200" width="60" height="100"/>
+          <AbsoluteConstraints x="0" y="200" width="50" height="100"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="jmnavpilot.ui.Horizon" name="horizon1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="110" y="200" width="100" height="100"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="jmnavpilot.ui.Compass" name="compass1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="220" y="200" width="90" height="100"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="jmnavpilot.ui.SpdMeter" name="spdMeter1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="51" y="201" width="50" height="100"/>
         </Constraint>
       </Constraints>
     </Component>

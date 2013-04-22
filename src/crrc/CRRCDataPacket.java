@@ -85,13 +85,13 @@ public class CRRCDataPacket {
 
     @Override
     public String toString() {
-        return "test:\n"
-                + "Acc:   " + acc + "\n"
+        return String.format(
+                "Acc:   " + acc + "\n"
                 + "Ang:   " + ang + "\n"
                 + "Mag:   " + mag + "\n"
-                + "Alt:   " + alt + " (gps: " + gps_alt + " )\n"
-                + "Speed: " + spd + "\n"
-                + "Long:  " + gps_longitude + "\n"
-                + "Lat:   " + gps_latitude + "\n";
+                + "Alt:   %2.2f (gps: %2.2f )\n"
+                + "Speed: %2.2f\n"
+                + "Long:  %1.6f\n"
+                + "Lat:   %1.6f\n",alt,gps_alt,spd,gps_longitude,gps_latitude);
     }
 }

@@ -33,18 +33,6 @@ public class JMNAVPilot {
         pilot.run();
     }
 
-    public void setServos(float ch0, float ch1, float thrust) {
-        byte[] ss = {'S', 'S'};
-        byte[] blancs = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-//        ss = mnav.concat(ss,
-//                mnav.concat(mnav.bytesFromPPM((1 + ch0) / 2), // Unknown
-//                mnav.concat(mnav.bytesFromPPM((1 + ch1) / 2), // Unknown
-//                mnav.concat(mnav.bytesFromPPM(thrust), // Thrust
-//                blancs))));
-//        mnav.sendData(ss);
-
-    }
-
     /**
      *
      * @param ch1 -1..1
@@ -58,26 +46,18 @@ public class JMNAVPilot {
     }
 
     public void run() throws IOException {
-        System.out.println(mnav);
         jMNAVStatusFrame frame = new jMNAVStatusFrame();
         frame.setVisible(true);
-        int count = 0;
-        float ch0, ch1;
         PlaneState ps = new PlaneState(1.0 / 100);
-        CRRCDataPacket state;
         Pilot pilot = new GamePadPilot();
-        double[] controls;
-        steer(0, 0, 0.5);
+        double[] ctrls;
         while (true) {
-            state = mnav.receive();
-            ps.update(state);
-            double[] ctrls = pilot.getControls();
+            ps.update(mnav.receive());
+            pilot.update(ps);
+            ctrls = pilot.getControls();
             steer(ctrls[0], ctrls[1], ctrls[2]);
-            if (count++ == 25) {
-                frame.updateText(state.toString());
-                frame.updateState(ps);
-                count = 0;
-            }
+            frame.updateState(ps);
+            frame.updateText(ps.getSensors().toString());
         }
     }
 }

@@ -78,6 +78,6 @@ public class Vec3d {
 
     @Override
     public String toString() {
-        return "Vec3d{" + "x=" + x + ", y=" + y + ", z=" + z + '}';
+        return String.format("Vec3d{ x=%2.2f, y=%2.2f, z=%2.2f }", x, y, z);
     }
 }

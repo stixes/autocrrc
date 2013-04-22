@@ -13,20 +13,20 @@ import jmnavpilot.PlaneState;
  *
  * @author Jesper
  */
-public class AltMeter extends Instrument {
+public class SpdMeter extends Instrument {
 
-    private double maxAlt;
-    private double alt = 0;
+    private double maxSpd;
+    private double spd = 0;
 
-    public AltMeter() {
+    public SpdMeter() {
         super();
-        maxAlt = 100; // meters
-        alt = 0;
+        maxSpd = 50; // meters
+        spd = 0;
     }
 
-    public AltMeter(double maxHeight) {
+    public SpdMeter(double maxHeight) {
         super();
-        this.maxAlt = maxHeight;
+        this.maxSpd = maxHeight;
     }
 
     @Override
@@ -34,29 +34,23 @@ public class AltMeter extends Instrument {
         // Dynamically calculate size information
         Dimension size = getSize();
 
-        int y = (int) (size.height - (size.height * alt / maxAlt)) - 1;
+        int y = (int) (size.height - (size.height * spd / maxSpd)) - 1;
 
         g.setColor(Color.black);
         g.fillRect(0, 0, size.width, size.height);
         g.setColor(Color.white);
-        String msg = "Altitude [m]";
+        String msg = "Speed [m/s]";
         if (5 + g.getFontMetrics().getStringBounds(msg, g).getWidth() > size.width) {
-            msg = "Alt. [m]";
+            msg = "Spd. [m/s]";
         }
         g.drawString(msg, 5, g.getFontMetrics().getHeight());
-        g.drawString(String.format("%3.1f", alt), 5, size.height / 2);
+        g.drawString(String.format("%3.1f", spd), 5, size.height / 2);
         g.drawLine(0, y, size.width, y);
     }
 
     @Override
     public void update(PlaneState state) {
-        this.alt = state.getAlt();
-        if (alt > maxAlt) {
-            maxAlt = maxAlt * 10;
-        }
-        if (alt < maxAlt / 10 && maxAlt > 10) {
-            maxAlt = maxAlt / 10;
-        }
+        this.spd = state.getSpeed();
         this.repaint();
     }
 }

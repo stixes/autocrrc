@@ -17,19 +17,20 @@ public class GamePadPilot implements Pilot {
     private final Axis ax_x;
     private final Axis ax_y;
     private final Axis ax_t;
+    private final PIDController pid_t;
+    private double speed;
 
     public GamePadPilot() {
         JXInputDevice dev = JXInputManager.getJXInputDevice(0);
         ax_x = dev.getAxis(0);
-        System.out.println("Assigned " + ax_x.getName() + " to Aileron.");
         ax_y = dev.getAxis(1);
-        System.out.println("Assigned " + ax_y.getName() + " to Elevron.");
         ax_t = dev.getAxis(2);
-        System.out.println("Assigned " + ax_t.getName() + " to Throttle.");
+        pid_t = new PIDController(5, 0.1, 0, 15);
     }
 
     @Override
     public void update(PlaneState ps) {
+        speed = ps.getSpeed();
     }
 
     @Override
@@ -45,6 +46,12 @@ public class GamePadPilot implements Pilot {
             a = 0;
         }
         double t = ax_t.getValue();
+
+        t = pid_t.update(speed);
+        
+        t= -0.98; // Debug
+
+        System.out.println(String.format("speed: %3.2f  T: %2.2f", speed, t));
 
         double[] result = {
             e + a,

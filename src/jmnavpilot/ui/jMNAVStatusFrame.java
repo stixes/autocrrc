@@ -51,14 +51,20 @@ public class jMNAVStatusFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextPane1 = new javax.swing.JTextPane();
-        altMeter2 = new jmnavpilot.ui.AltMeter();
+        altMeter = new jmnavpilot.ui.AltMeter();
+        horizon1 = new jmnavpilot.ui.Horizon();
+        compass1 = new jmnavpilot.ui.Compass();
+        spdMeter1 = new jmnavpilot.ui.SpdMeter();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextPane1.setText("Hello, World!");
         getContentPane().add(jTextPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 498, 198));
-        getContentPane().add(altMeter2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 60, 100));
+        getContentPane().add(altMeter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 50, 100));
+        getContentPane().add(horizon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 100, 100));
+        getContentPane().add(compass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 90, 100));
+        getContentPane().add(spdMeter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 201, 50, 100));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -68,11 +74,17 @@ public class jMNAVStatusFrame extends javax.swing.JFrame {
     }
     
     public void updateState(PlaneState state) {
-        altMeter2.update(state);
+        altMeter.update(state);
+        spdMeter1.update(state);
+        horizon1.update(state);
+        compass1.update(state);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private jmnavpilot.ui.AltMeter altMeter2;
+    private jmnavpilot.ui.AltMeter altMeter;
+    private jmnavpilot.ui.Compass compass1;
+    private jmnavpilot.ui.Horizon horizon1;
     private javax.swing.JTextPane jTextPane1;
+    private jmnavpilot.ui.SpdMeter spdMeter1;
     // End of variables declaration//GEN-END:variables
 }
