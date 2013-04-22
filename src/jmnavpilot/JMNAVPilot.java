@@ -48,7 +48,7 @@ public class JMNAVPilot {
     public void run() throws IOException {
         jMNAVStatusFrame frame = new jMNAVStatusFrame();
         frame.setVisible(true);
-        PlaneState ps = new PlaneState(1.0 / 100);
+        PlaneState ps = new PlaneState();
         Pilot pilot = new GamePadPilot();
         double[] ctrls;
         while (true) {

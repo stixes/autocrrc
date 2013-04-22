@@ -29,6 +29,15 @@ public class PIDController {
         this.ref = ref;
     }
 
+    public PIDController(double p, double i, double d, double ref, double minOut, double maxOut) {
+        this.Kp = p;
+        this.Ki = i;
+        this.Kd = d;
+        this.ref = ref;
+        this.maxOut = maxOut;
+        this.minOut = minOut;
+    }
+
     public double getP() {
         return Kp;
     }
@@ -96,11 +105,15 @@ public class PIDController {
         this.output = Math.min(Math.max(this.output, minOut), maxOut);
         return output;
     }
-    
+
+    public void reset() {
+        lastErr = totalErr = 0.0;
+    }
+
     public void enable() {
         enabled = true;
     }
-    
+
     public void disable() {
         enabled = false;
     }
