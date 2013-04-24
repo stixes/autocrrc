@@ -26,10 +26,23 @@ public class PlaneState {
     private double lastAltD = 0.0;
     private boolean reset = false;
     private Vec3d f_acc = new Vec3d();
-//    private BufferedWriter outfile;
+    private BufferedWriter outfile;
 
     public PlaneState() throws IOException {
-//        outfile = new BufferedWriter(new FileWriter("test.csv"));
+        outfile = new BufferedWriter(new FileWriter("test.csv"));
+        outfile.write("\"Acc_X\",");
+        outfile.write("\"Acc_Y\",");
+        outfile.write("\"Acc_Z\",");
+        outfile.write("\"Ang_X\",");
+        outfile.write("\"Ang_Y\",");
+        outfile.write("\"Ang_Z\",");
+        outfile.write("\"Mag_X\",");
+        outfile.write("\"Mag_Y\",");
+        outfile.write("\"Mag_Z\",");
+        outfile.write("\"Speed\",");
+        outfile.write("\"Alt\",");
+        outfile.newLine();
+        outfile.flush();
         reset();
     }
 
@@ -80,19 +93,19 @@ public class PlaneState {
         // Z = Up 1..-1 Down
         compass = Math.atan2(-s.getMag().getY(), -s.getMag().getX()) + Math.PI;
         // Log output
-//        outfile.write(s.getAcc().getX()+",");
-//        outfile.write(s.getAcc().getY()+",");
-//        outfile.write(s.getAcc().getZ()+",");
-//        outfile.write(s.getAng().getX()+",");
-//        outfile.write(s.getAng().getY()+",");
-//        outfile.write(s.getAng().getZ()+",");
-//        outfile.write(s.getMag().getX()+",");
-//        outfile.write(s.getMag().getY()+",");
-//        outfile.write(s.getMag().getZ()+",");
-//        outfile.write((int) s.getSpd()+",");
-//        outfile.write((int) s.getAlt());
-//        outfile.newLine();
-//        outfile.flush();
+        outfile.write(s.getAcc().getX() + ",");
+        outfile.write(s.getAcc().getY() + ",");
+        outfile.write(s.getAcc().getZ() + ",");
+        outfile.write(s.getAng().getX() + ",");
+        outfile.write(s.getAng().getY() + ",");
+        outfile.write(s.getAng().getZ() + ",");
+        outfile.write(s.getMag().getX() + ",");
+        outfile.write(s.getMag().getY() + ",");
+        outfile.write(s.getMag().getZ() + ",");
+        outfile.write(s.getSpd() + ",");
+        outfile.write(s.getAlt() + "");
+        outfile.newLine();
+        outfile.flush();
     }
 
     public double getSpeed() {
@@ -117,7 +130,7 @@ public class PlaneState {
 
     @Override
     protected void finalize() throws Throwable {
-//        outfile.close();
+        outfile.close();
         super.finalize(); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -64,8 +64,8 @@ public class GamePadPilot implements Pilot {
 
 //        t= -1; // Debug
 
-        System.out.println(String.format("roll: %3.2f  A: %2.2f", roll, a));
-        System.out.println(String.format("speed: %3.2f  T: %2.2f", speed, t));
+//        System.out.println(String.format("roll: %3.2f  A: %2.2f", roll, a));
+//        System.out.println(String.format("speed: %3.2f  T: %2.2f", speed, t));
 
         double[] result = {
             e + a,
