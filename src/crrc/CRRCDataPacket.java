@@ -39,8 +39,7 @@ public class CRRCDataPacket {
         acc.mult(2.0 * 9.80); // Convert G to m/s^2
         ang = new Vec3d(fdata[3], fdata[4], fdata[5]);
 //        ang.mult(200.0);
-        mag = new Vec3d(fdata[6], fdata[7], fdata[8]);
-        mag.setLen(1.0);
+        mag = new Vec3d(fdata[6], fdata[7], fdata[8]).newLength(1.0);
         alt = 10000.0 * fdata[12];
         spd = 80.0 * fdata[13];
 
