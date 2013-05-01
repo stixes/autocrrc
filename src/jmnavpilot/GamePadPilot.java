@@ -4,6 +4,7 @@
  */
 package jmnavpilot;
 
+import jmnavpilot.control.PIDController;
 import de.hardcode.jxinput.Axis;
 import de.hardcode.jxinput.JXInputDevice;
 import de.hardcode.jxinput.JXInputManager;
