@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jmnavpilot.ui;
+package jmnav.ui;
 
-import jmnavpilot.PlaneState;
+import jmnav.PlaneState;
 
 /**
  *
@@ -20,7 +20,7 @@ public class jMNAVStatusFrame extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -51,10 +51,11 @@ public class jMNAVStatusFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jTextPane1 = new javax.swing.JTextPane();
-        altMeter = new jmnavpilot.ui.AltMeter();
-        horizon1 = new jmnavpilot.ui.Horizon();
-        compass1 = new jmnavpilot.ui.Compass();
-        spdMeter1 = new jmnavpilot.ui.SpdMeter();
+        altMeter = new jmnav.ui.AltMeter();
+        horizon1 = new jmnav.ui.Horizon();
+        compass1 = new jmnav.ui.Compass();
+        spdMeter1 = new jmnav.ui.SpdMeter();
+        aoAMeter1 = new jmnav.ui.AoAMeter();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -63,8 +64,9 @@ public class jMNAVStatusFrame extends javax.swing.JFrame {
         getContentPane().add(jTextPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 498, 198));
         getContentPane().add(altMeter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 50, 100));
         getContentPane().add(horizon1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 100, 100));
-        getContentPane().add(compass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 90, 100));
+        getContentPane().add(compass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 90, 100));
         getContentPane().add(spdMeter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 201, 50, 100));
+        getContentPane().add(aoAMeter1, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 201, 50, 100));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -72,19 +74,21 @@ public class jMNAVStatusFrame extends javax.swing.JFrame {
     public void updateText(String str) {
         jTextPane1.setText(str);
     }
-    
+
     public void updateState(PlaneState state) {
         altMeter.update(state);
         spdMeter1.update(state);
         horizon1.update(state);
         compass1.update(state);
+        aoAMeter1.update(state);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private jmnavpilot.ui.AltMeter altMeter;
-    private jmnavpilot.ui.Compass compass1;
-    private jmnavpilot.ui.Horizon horizon1;
+    private jmnav.ui.AltMeter altMeter;
+    private jmnav.ui.AoAMeter aoAMeter1;
+    private jmnav.ui.Compass compass1;
+    private jmnav.ui.Horizon horizon1;
     private javax.swing.JTextPane jTextPane1;
-    private jmnavpilot.ui.SpdMeter spdMeter1;
+    private jmnav.ui.SpdMeter spdMeter1;
     // End of variables declaration//GEN-END:variables
 }
