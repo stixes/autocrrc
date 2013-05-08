@@ -10,7 +10,7 @@ import java.io.IOException;
  *
  * @author Jesper
  */
-public class JMnavImu {
+class JMnavImu {
 
     private JMnavImuDevice dev;
 

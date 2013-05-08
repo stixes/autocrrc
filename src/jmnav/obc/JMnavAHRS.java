@@ -8,7 +8,7 @@ package jmnav.obc;
  *
  * @author Jesper
  */
-public class JMnavAHRS {
+class JMnavAHRS {
 
     private ImuData last;
     private JMnavImu imu;

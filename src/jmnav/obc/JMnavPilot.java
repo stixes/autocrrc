@@ -37,7 +37,7 @@ class JMnavPilot implements Runnable {
         pid_h = new PIDController(0.3, 0.01, 0.2);
     }
 
-    private double[] process(Odometry odometry) {
+    private CmdData process(Odometry odometry) {
         JXInputManager.updateFeatures();
         double e = -ax_y.getValue();
         if (Math.abs(e) < 0.1) {
@@ -77,10 +77,12 @@ class JMnavPilot implements Runnable {
 //                + "R: %2.3f\n"
 //                + "P: %2.3f\n"
 //                + "H: %2.3f", odometry.roll * 180 / Math.PI, odometry.pitch * 180 / Math.PI, odometry.altitude));
-        double[] cmd = new double[3];
-        cmd[0] = t; // Throttle
-        cmd[1] = a; // Elevator
-        cmd[2] = e; // Aileron
+        CmdData cmd = new CmdData(
+                a,// Aileron
+                e,// Elevator
+                0, // Unused
+                t // Throttle
+                );
 
         return cmd;
     }

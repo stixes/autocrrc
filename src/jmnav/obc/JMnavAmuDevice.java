@@ -22,6 +22,6 @@ public interface JMnavAmuDevice {
      *
      * @param inputs
      */
-    public void sendCommand(double[] inputs) throws IOException;
+    public void sendCommand(CmdData inputs) throws IOException;
 
 }

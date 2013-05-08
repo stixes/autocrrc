@@ -4,6 +4,8 @@
  */
 package jmnav.obc;
 
+import java.io.IOException;
+
 /**
  *
  * @author Jesper
@@ -16,7 +18,7 @@ class JMnavAmu {
         this.dev = dev;
     }
 
-    public void sendCommand(double[] inputs) {
+    public void sendCommand(CmdData inputs) throws IOException {
         dev.sendCommand(inputs);
     }
 
