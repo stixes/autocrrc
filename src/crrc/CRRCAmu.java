@@ -5,6 +5,7 @@
 package crrc;
 
 import java.io.IOException;
+import jmnav.obc.CmdData;
 import jmnav.obc.JMnavAmuDevice;
 
 /**
@@ -17,12 +18,11 @@ public class CRRCAmu implements JMnavAmuDevice {
         CRRCSocket.getSocket();
     }
 
-    /**
-     * Expects: 0 = Throttle -1..1, 1 = Aileron -1..1, 2 = Elevator -1..1.
-     */
     @Override
-    public void sendCommand(double[] i) throws IOException {
-        double[] data = {0.5 + (i[2] + i[1]) / 2, 0.5 - (i[2] - i[1]) / 2, 0.5 * i[0] + 0.5, 0, 0, 0, 0, 0, 0};
-            CRRCSocket.getSocket().send(new CRRCCmdPacket(CRRCCmdPacket.SET_SERVO, data));
+    public void sendCommand(CmdData i) throws IOException {
+        double[] data = {0.5 + (i.elevator + i.aileron) / 2,
+            0.5 - (i.elevator - i.aileron) / 2,
+            0.5 * i.throttle + 0.5, 0, 0, 0, 0, 0, 0};
+        CRRCSocket.getSocket().send(new CRRCCmdPacket(CRRCCmdPacket.SET_SERVO, data));
     }
 }
