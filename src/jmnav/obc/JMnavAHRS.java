@@ -11,18 +11,18 @@ package jmnav.obc;
 public class JMnavAHRS {
 
     private ImuData last;
-    private JMnavPilot pilot;
+    private JMnavImu imu;
     private double alt;
     private double speed;
     private double compass;
     private double roll;
     private double pitch;
 
-    public JMnavAHRS(JMnavPilot pilot) {
-        this.pilot = pilot;
+    public JMnavAHRS(JMnavImu imu) {
+        this.imu = imu;
     }
 
-    public void processData(ImuData input) {
+    public Odometry processData(ImuData input) {
         // In case GPS data is missing, retain last available information
         if (null == input.gpsData) {
             input.gpsData = last.gpsData;
@@ -42,9 +42,10 @@ public class JMnavAHRS {
         if (last != null) {
             pitch = Math.asin(last.gpsData.speed_V / speed);
         }
+        last = input;
         //        System.out.println(input);
         Odometry odo = new Odometry();
-        odo.alt = alt;
+        odo.altitude = alt;
         odo.compass = compass;
         odo.roll = roll;
         odo.pitch = pitch;
@@ -56,6 +57,11 @@ public class JMnavAHRS {
         odo.gpsSpeedE = input.gpsData.speed_E;
         odo.gpsSpeedN = input.gpsData.speed_N;
         odo.gpsSpeedV = input.gpsData.speed_V;
-        pilot.process(odo);
+        return odo;
+    }
+
+    Odometry getOdometry() {
+        return processData(imu.readData());
+
     }
 }

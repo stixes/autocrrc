@@ -14,19 +14,16 @@ import java.io.IOException;
  */
 public class JMnavOBC {
 
-
     public static void main(String[] Args) throws IOException {
         JMnavOBC obc = new JMnavOBC();
         obc.run();
     }
 
     private void run() throws IOException {
-        JMnavImu imu = new JMnavImu(new CRRCImu(),
-                new JMnavAHRS(
-                new JMnavPilot(
-                new JMnavAmu(
-                new CRRCAmu()
-                ))));
-        imu.run();
+        // Set up control train. IMU drives.
+        JMnavPilot pilot = new JMnavPilot(
+                new JMnavAHRS(new JMnavImu(new CRRCImu())),
+                new JMnavAmu(new CRRCAmu()));
+        pilot.run();
     }
 }

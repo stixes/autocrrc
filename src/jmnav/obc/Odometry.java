@@ -12,7 +12,7 @@ class Odometry {
 
     public double roll;
     public double pitch;
-    public double alt;
+    public double altitude;
     public double compass;
     public double speed;
     public double gpsLongitude;

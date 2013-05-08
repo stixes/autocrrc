@@ -10,36 +10,21 @@ import java.io.IOException;
  *
  * @author Jesper
  */
-public class JMnavImu implements Runnable {
+public class JMnavImu {
 
     private JMnavImuDevice dev;
-    private JMnavAHRS ahrs;
-    private boolean running = true;
 
-    public JMnavImu(JMnavImuDevice dev, JMnavAHRS ahrs) {
+    public JMnavImu(JMnavImuDevice dev) {
         this.dev = dev;
-        this.ahrs = ahrs;
     }
 
-    public void start() {
-        new Thread(this).start();
-    }
-
-    public void run() {
-        ImuData data;
-        while (running) {
-            try {
-                data = dev.read();
-                ahrs.processData(data);
-            } catch (IOException ex) {
-                System.exit(0);
-            }
+    public ImuData readData() {
+        ImuData data = null;
+        try {
+            data = dev.read();
+        } catch (IOException ex) {
+            System.exit(1);
         }
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-        running = false;
+        return data;
     }
 }
