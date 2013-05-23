@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import jmnav.PlaneState;
+import jmnav.obc.Odometry;
 
 /**
  *
@@ -45,8 +46,8 @@ public class AoAMeter extends Instrument {
     }
 
     @Override
-    public void update(PlaneState state) {
-        this.aoa = state.getPitch() * 180 / Math.PI;
+    public void update(Odometry state) {
+        this.aoa = state.pitch * 180 / Math.PI;
         this.repaint();
     }
 }

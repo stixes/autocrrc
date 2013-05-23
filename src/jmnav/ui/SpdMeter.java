@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import jmnav.PlaneState;
+import jmnav.obc.Odometry;
 
 /**
  *
@@ -49,8 +50,8 @@ public class SpdMeter extends Instrument {
     }
 
     @Override
-    public void update(PlaneState state) {
-        this.spd = state.getSpeed();
+    public void update(Odometry state) {
+        this.spd = state.speed;
         this.repaint();
     }
 }

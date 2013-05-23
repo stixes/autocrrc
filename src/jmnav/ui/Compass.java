@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import jmnav.PlaneState;
+import jmnav.obc.Odometry;
 
 /**
  *
@@ -42,8 +43,8 @@ public class Compass extends Instrument {
     }
 
     @Override
-    public void update(PlaneState data) {
-        compass = data.getCompass();
+    public void update(Odometry data) {
+        compass = data.compass;
         this.repaint();
     }
 }

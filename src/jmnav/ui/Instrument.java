@@ -9,6 +9,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import jmnav.PlaneState;
+import jmnav.obc.Odometry;
 
 /**
  *
@@ -31,7 +32,7 @@ public class Instrument extends Component {
         g.drawOval(x, y, d, d);
     }
 
-    public void update(PlaneState data) {
+    public void update(Odometry data) {
     }
 ;
 }
