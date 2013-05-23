@@ -15,15 +15,24 @@ import java.io.IOException;
 public class JMnavOBC {
 
     public static void main(String[] Args) throws IOException {
+        System.out.println("JMnav pilot 0.01b starting up..");
         JMnavOBC obc = new JMnavOBC();
         obc.run();
     }
 
-    private void run() throws IOException {
-        // Set up control train. IMU drives.
+    /**
+     * Application main loop.
+     */
+    private void run() {
+        // Set up control train. Pilot drives.
+        try {
         JMnavPilot pilot = new JMnavPilot(
                 new JMnavAHRS(new JMnavImu(new CRRCImu())),
                 new JMnavAmu(new CRRCAmu()));
         pilot.run();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(2);
+        }
     }
 }

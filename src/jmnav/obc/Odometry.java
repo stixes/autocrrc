@@ -8,7 +8,7 @@ package jmnav.obc;
  *
  * @author Jesper
  */
-class Odometry {
+public class Odometry {
 
     public double roll;
     public double pitch;
@@ -23,5 +23,6 @@ class Odometry {
     public double gpsSpeedN;
     public double gpsSpeedE;
     public double gpsSpeedV;
+    public boolean hasGPS = false;
 
 }
