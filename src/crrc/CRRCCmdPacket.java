@@ -4,6 +4,8 @@
  */
 package crrc;
 
+import java.math.BigInteger;
+
 /**
  *
  * @author Jesper
@@ -12,6 +14,7 @@ public class CRRCCmdPacket {
 
     public static final byte PING = 0;
     public static final byte SET_SERVO = 1;
+    public static final byte SET_PACKET_TYPE = 2;
     private byte[] payload;
 
     public CRRCCmdPacket(byte type, double[] data) {
@@ -21,6 +24,29 @@ public class CRRCCmdPacket {
                 break;
             case CRRCCmdPacket.SET_SERVO:
                 payload = setServo(data);
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }
+
+    public CRRCCmdPacket(byte type) {
+        switch (type) {
+            case CRRCCmdPacket.PING:
+                payload = ping();
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }
+
+    public CRRCCmdPacket(byte type, char data) {
+        switch (type) {
+            case CRRCCmdPacket.PING:
+                payload = ping();
+                break;
+            case CRRCCmdPacket.SET_PACKET_TYPE:
+                payload = setPacketType(data);
                 break;
             default:
                 throw new AssertionError();
@@ -75,5 +101,13 @@ public class CRRCCmdPacket {
     @Override
     public String toString() {
         return "CRRCCmdPacket{" + "payload type=" + (char) payload[0] + " " + (char) payload[1] + '}';
+    }
+
+    private byte[] setPacketType(char data) {
+        byte[] cmd = {'W', 'F', 0x01, 0x00, 0x03, 0x00, (byte) data};
+        BigInteger bigInt = new BigInteger(cmd);
+        String hexString = bigInt.toString(16); // 16 is the radix
+        System.out.println("hex: " + hexString);
+        return cmd;
     }
 }

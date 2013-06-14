@@ -21,11 +21,12 @@ public class JMnavComm {
 //        waypoints[0] = new Vec3d(0.03, 0.03, 15.0);
 //        waypoints[1] = new Vec3d(-0.03, 0.03, 40.0);
 //        waypoints[2] = new Vec3d(0.0, 0.0, 20.0);
-        waypoints = new Vec3d[4];
-        waypoints[0] = new Vec3d(0.02, 0.02, 35.0);
-        waypoints[1] = new Vec3d(-0.02, 0.02, 35.0);
-        waypoints[2] = new Vec3d(-0.02, -0.02, 35.0);
-        waypoints[3] = new Vec3d(0.02, -0.02, 35.0);
+        waypoints = new Vec3d[5];
+        waypoints[0] = new Vec3d(0.0, 0.02, 35.1);
+        waypoints[1] = new Vec3d(-0.02, 0.02, 35.1);
+        waypoints[2] = new Vec3d(-0.02, -0.02, 35.1);
+        waypoints[3] = new Vec3d(0.02, -0.02, 35.1);
+        waypoints[4] = new Vec3d(0.02, 0.02, 35.1);
     }
 
     void send(Odometry odometry) {

@@ -18,13 +18,22 @@ import jmnav.math.Vec3d;
  */
 class JMnavPilot implements Runnable {
 
-    // Plane config
+    // Plane config: Allegro E-Lite
     private final double max_roll = 8;
-    private final double max_pitch = 8;
-    private final double set_speed = 10;
+    private final double max_pitch = 15;
+    private final double set_speed = 12;
     private final double pitch_ff = 2.2; // r = m*g/2k
+
+
+    // Plane config: Sport
+//    private final double max_roll = 15;
+//    private final double max_pitch = 15;
+//    private final double set_speed = 20;
+//    private final double pitch_ff = 3.7; // r = m*g/2k
+
+
     private final JMnavAmu amu;
-    private final Axis ax_x, ax_y, ax_t;
+//    private final Axis ax_x, ax_y, ax_t;
     private final JMnavAHRS ahrs;
     private boolean running = true;
     private Vec3d destination;
@@ -40,14 +49,15 @@ class JMnavPilot implements Runnable {
         this.amu = amu;
         this.ahrs = ahrs;
         this.comm = new JMnavComm(this);
-        JXInputDevice dev = JXInputManager.getJXInputDevice(0);
-        ax_x = dev.getAxis(0);
-        ax_y = dev.getAxis(1);
-        ax_t = dev.getAxis(2);
+//        JXInputDevice dev = JXInputManager.getJXInputDevice(0);
+//        ax_x = dev.getAxis(0);
+//        ax_y = dev.getAxis(1);
+//        ax_t = dev.getAxis(2);
         pid_t = new PIDController(0.2, 0.01, 0.0);
         pid_a = new PIDController(0.04, 0, 0.1);
-        pid_e = new PIDController(0.04, 0, 0.1);
+        pid_e = new PIDController(0.04, 0, 0.08);
         pid_h = new PIDController(0.3, 0.01, 0.2);
+//        pid_h = new PIDController(0.3, 0.0, 0.0);
         pid_c = new PIDController(0.05, 0, 0.1);
         comm.destinationReached();
     }
@@ -55,15 +65,18 @@ class JMnavPilot implements Runnable {
     private CmdData process(Odometry odometry) {
         comm.send(odometry);
         JXInputManager.updateFeatures();
-        double e = -ax_y.getValue();
+//        double e = -ax_y.getValue();
+        double e = 0;
         if (Math.abs(e) < 0.1) {
             e = 0.0;
         }
-        double a = ax_x.getValue();
+//        double a = ax_x.getValue();
+        double a = 0;
         if (Math.abs(a) < 0.1) {
             a = 0;
         }
-        double t = ax_t.getValue();
+//        double t = ax_t.getValue();
+        double t = 0;
 
         // Throttle PI
         if (t > 0.1 || odometry.altitude > 5) {
@@ -96,13 +109,13 @@ class JMnavPilot implements Runnable {
             // Altitude adjustment
             pid_h.setRef(destination.z);
             double h = pid_h.update(odometry.altitude);
-//            e = 0.2 * h;
+//            e = -0.1 * h;
             pid_e.setRef(-max_pitch * h);
             e = pid_e.update(odometry.pitch * 180 / Math.PI);
             // Compensatre for roll
             e -= pitch_ff * odometry.roll * odometry.roll;
         } else {
-            // Takeoff
+//             Takeoff
             pid_e.setRef(-max_pitch);
             e = pid_e.update(odometry.pitch * 180 / Math.PI);
         }

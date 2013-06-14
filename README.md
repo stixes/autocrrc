@@ -25,11 +25,15 @@ is recommended as I provide project files and uses the integrated test system.
 For my system, I use an USB Xbox controller to provide input for the autopilot,
 so some kind of joystick or input device may be useful.
 
+Checks:
+* Project should include the jxinput.jar file
+* Program must be run with "-Djava.library.path=<path to .dll>" ie. -Djava.library.path=C:\JXInput_0.3.4
+
 Links
 -----
 CRRCSim - http://sourceforge.net/apps/mediawiki/crrcsim/index.php?title=Main_Page
 
-JXInput - http://www.hardcode.de/jxinput/
+JXInput - http://www.hardcode.de/jxinput/ (Ver. 0.3.4 should work)
 
 Goal
 ----

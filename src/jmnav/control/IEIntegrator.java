@@ -27,6 +27,10 @@ public class IEIntegrator {
         return val;
     }
 
+    public void setVal(double val) {
+        this.val = val;
+    }
+
     public long getCount() {
         return count;
     }

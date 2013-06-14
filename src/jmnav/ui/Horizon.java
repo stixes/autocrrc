@@ -54,14 +54,20 @@ public class Horizon extends Instrument {
         g.drawLine(0, y1, size.width - 1, y2);
 
         // Helper lines
-        g.setColor(Color.black);
-        g.drawLine(0, size.height / 2, size.width - 1, size.height / 2);
         g.setColor(Color.lightGray);
-        for (int i = -35; i < 45; i += 10) {
+        int x = size.width / 10;
+        for (int i = -30; i < 40; i += 10) {
             int offset = (int) (Math.tan(i * Math.PI / 180) * d);
-            g.drawLine(size.width / 4, size.height / 2 + offset, size.width - 1 - size.width/4, size.height / 2 + offset);
+            g.drawLine(size.width / 2 - x, size.height / 2 + offset, size.width / 2 + x, size.height / 2 + offset);
 
         }
+        for (int i = -35; i < 40; i += 5) {
+            int offset = (int) (Math.tan(i * Math.PI / 180) * d);
+            g.drawLine(size.width / 2 - x / 4, size.height / 2 + offset, size.width / 2 + x / 4, size.height / 2 + offset);
+
+        }
+        g.setColor(Color.black);
+        g.drawLine(0, size.height / 2, size.width - 1, size.height / 2);
 
 //        g.drawLine(0, y1-1, size.width-1, y2-1);
         g.drawRect(0, 0, size.width - 1, size.height - 1);

@@ -26,7 +26,7 @@ public class CRRCSocket extends Socket {
             public void run() {
                 while (true) {
                     try {
-                        CRRCSocket.getSocket().send(new CRRCCmdPacket(CRRCCmdPacket.PING, null));
+                        CRRCSocket.getSocket().send(new CRRCCmdPacket(CRRCCmdPacket.PING));
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                         System.exit(0);

@@ -5,8 +5,7 @@
 package jmnav;
 
 import crrc.CRRCCmdPacket;
-import jmnav.ui.jMNAVStatusFrame;
-import crrc.CRRCDataPacket;
+import jmnav.ui.JMnavStatusFrame;
 import crrc.CRRCSocket;
 import java.io.IOException;
 
@@ -46,7 +45,7 @@ public class JMNAVPilot {
     }
 
     public void run() throws IOException {
-        jMNAVStatusFrame frame = new jMNAVStatusFrame();
+        JMnavStatusFrame frame = new JMnavStatusFrame();
         frame.setVisible(true);
         PlaneState ps = new PlaneState();
         Pilot pilot = new GamePadPilot();
@@ -56,8 +55,8 @@ public class JMNAVPilot {
             pilot.update(ps);
             ctrls = pilot.getControls();
             steer(ctrls[0], ctrls[1], ctrls[2]);
-            frame.updateState(ps);
-            frame.updateText(ps.getSensors().toString());
+//            frame.updateState(ps);
+//            frame.updateText(ps.getSensors().toString());
         }
     }
 }
