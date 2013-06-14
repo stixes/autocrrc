@@ -7,7 +7,6 @@ package jmnav.ui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import jmnav.PlaneState;
 import jmnav.obc.Odometry;
 
 /**
@@ -49,6 +48,7 @@ public class AltMeter extends Instrument {
         g.drawLine(0, y, size.width, y);
     }
 
+    @Override
     public void update(Odometry state) {
         this.alt = state.altitude;
         if (alt > maxAlt) {
